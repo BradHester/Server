@@ -1,9 +1,13 @@
 var http = require("http");
 var qs = require("querystring");
+var sensor = require('node-dht-sensor');
+
 var port = 9000;
 
 
 http.createServer(function(req, resp) {
+const now = new Date();
+
   switch (req.method) {
     case "GET":
       if (req.url === "/") {
@@ -17,15 +21,21 @@ http.createServer(function(req, resp) {
         resp.writeHead(200, {
           "ContentType": "text/html"
         });
-        resp.write("{\"Temperature\": \"32\"}");
-        resp.end();
+        sensor.read(11, 4, function(err, temperature, humidity) {
+         if (!err) {
+           resp.write("{\"DateTime\" : " + now + ", \"Temperature\": \"" + temperature + "\"}");
+           resp.end();
+        });
+
       }
       if (req.url === "/humidity") {
         resp.writeHead(200, {
           "ContentType": "text/html"
         });
-        resp.write("{Temperature}");
-        resp.end();
+        sensor.read(11, 4, function(err, temperature, humidity) {
+         if (!err) {
+           resp.write("{\"DateTime\" : " + now + ", \"Humidity\": \"" + humidity + "\"}");
+           resp.end();
       }
     case "POST":
       break;
