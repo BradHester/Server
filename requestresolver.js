@@ -36,6 +36,7 @@ const now = new Date();
          if (!err) {
            resp.write("{\"DateTime\" : " + now + ", \"Humidity\": \"" + humidity + "\"}");
            resp.end();
+              });
       }
     case "POST":
       break;
