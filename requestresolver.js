@@ -24,7 +24,7 @@ const now = new Date();
         });
         sensor.read(11, 4, function(err, temperature, humidity) {
          if (!err) {
-           resp.write("{\"DateTime\" : " + now + ", \"Temperature\": \"" + temperature + "\"}");
+           resp.write("{\"DateTime\" : \"" + now + "\", \"Temperature\": \"" + temperature + "\"}");
            resp.end();
            }
         });
@@ -36,7 +36,7 @@ const now = new Date();
         });
         sensor.read(11, 4, function(err, temperature, humidity) {
          if (!err) {
-           resp.write("{\"DateTime\" : " + now + ", \"Humidity\": \"" + humidity + "\"}");
+           resp.write("{\"DateTime\" : \"" + now + "\", \"Humidity\": \"" + humidity + "\"}");
            resp.end();
            }
         });
