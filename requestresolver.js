@@ -17,6 +17,7 @@ const now = new Date();
         resp.write("<html><head><title>Home</title></head><body>Brad's Test</body></html>");
         resp.end();
       }
+
       if (req.url === "/temperature") {
         resp.writeHead(200, {
           "ContentType": "text/html"
@@ -25,9 +26,10 @@ const now = new Date();
          if (!err) {
            resp.write("{\"DateTime\" : " + now + ", \"Temperature\": \"" + temperature + "\"}");
            resp.end();
+           }
         });
 
-      }
+
       if (req.url === "/humidity") {
         resp.writeHead(200, {
           "ContentType": "text/html"
@@ -36,8 +38,10 @@ const now = new Date();
          if (!err) {
            resp.write("{\"DateTime\" : " + now + ", \"Humidity\": \"" + humidity + "\"}");
            resp.end();
-              });
-      }
+           }
+        });
+
+
     case "POST":
       break;
     default:
