@@ -19,24 +19,34 @@ const now = new Date();
       }
 
       if (req.url === "/temperature") {
+        console.log("*******************************************");
+        console.log(now + "Temperature Requested");
         resp.writeHead(200, {
           "ContentType": "text/html"
         });
         sensor.read(11, 4, function(err, temperature, humidity) {
          if (!err) {
-           resp.write("{\"DateTime\" : \"" + now + "\", \"Temperature\": \"" + temperature + "\"}");
+           var temperaturereturn = "{\"DateTime\" : \"" + now + "\", \"Temperature\": \"" + temperature + "\"}";
+           console.log("Returning:");
+           console.log(temperaturereturn);
+           resp.write();
            resp.end();
            }
         });
       }
 
       if (req.url === "/humidity") {
+        console.log("*******************************************");
+        console.log(now + "Humidity Requested");
         resp.writeHead(200, {
           "ContentType": "text/html"
         });
         sensor.read(11, 4, function(err, temperature, humidity) {
          if (!err) {
-           resp.write("{\"DateTime\" : \"" + now + "\", \"Humidity\": \"" + humidity + "\"}");
+           var humidityreturn = "{\"DateTime\" : \"" + now + "\", \"Humidity\": \"" + humidity + "\"}";
+           console.log("Returning:");
+           console.log(temperaturereturn);
+           resp.write();
            resp.end();
            }
         });
