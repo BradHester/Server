@@ -17,7 +17,7 @@ http.createServer(function(req, resp) {
         resp.writeHead(200, {
           "ContentType": "text/html"
         });
-        resp.write({"Temperature": "32"});
+        resp.write("{\"Temperature\": \"32\"}");
         resp.end();
       }
       if (req.url === "/humidity") {
