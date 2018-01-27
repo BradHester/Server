@@ -20,7 +20,7 @@ const now = new Date();
 
       if (req.url === "/temperature") {
         console.log("*******************************************");
-        console.log(now + " Temperature Requested");
+        console.log(now + "; Temperature Requested");
         resp.writeHead(200, {
           "ContentType": "text/html"
         });
@@ -37,7 +37,7 @@ const now = new Date();
 
       if (req.url === "/humidity") {
         console.log("*******************************************");
-        console.log(now + " Humidity Requested");
+        console.log(now + "; Humidity Requested");
         resp.writeHead(200, {
           "ContentType": "text/html"
         });
