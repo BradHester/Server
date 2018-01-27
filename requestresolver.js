@@ -29,7 +29,7 @@ const now = new Date();
            var temperaturereturn = "{\"DateTime\" : \"" + now + "\", \"Temperature\": \"" + temperature + "\"}";
            console.log("Returning:");
            console.log(temperaturereturn);
-           resp.write();
+           resp.write(temperaturereturn);
            resp.end();
            }
         });
@@ -45,8 +45,8 @@ const now = new Date();
          if (!err) {
            var humidityreturn = "{\"DateTime\" : \"" + now + "\", \"Humidity\": \"" + humidity + "\"}";
            console.log("Returning:");
-           console.log(temperaturereturn);
-           resp.write();
+           console.log(humidityreturn);
+           resp.write(humidityreturn);
            resp.end();
            }
         });
