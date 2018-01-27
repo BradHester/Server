@@ -28,7 +28,7 @@ const now = new Date();
            resp.end();
            }
         });
-
+      }
 
       if (req.url === "/humidity") {
         resp.writeHead(200, {
@@ -40,7 +40,7 @@ const now = new Date();
            resp.end();
            }
         });
-
+      }
 
     case "POST":
       break;
