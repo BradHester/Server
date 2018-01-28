@@ -3,8 +3,7 @@ var qs = require("querystring");
 var sensor = require('node-dht-sensor');
 var APIreturn = '';
 var port = 9000;
-var sensortemperature = '';
-var sensorhumidity = '';
+//var sensorvalue = '';
 
 var dhtsensoreturn = function(value) {
   return new Promise((resolve, reject) => {
@@ -13,14 +12,14 @@ var dhtsensoreturn = function(value) {
         if (!err) {
           switch (value) {
             case "Temperature": {
-              sensortemperature = temperature.toFixed(0);
+              var sensorvalue = temperature.toFixed(0);
             }
             case "Humidity": {
-              sensorhumidity = humidity.toFixed(0);
+              var sensorvalue = humidity.toFixed(0);
             }
           }
-          console.log('Returning '+ value + ': ' + response);
-          return response
+          console.log('Returning '+ value + ': ' + sensorvalue);
+          return sensorvalue
         }
       });
     }).then(function(data){
@@ -48,7 +47,7 @@ const now = new Date();
 
         Promise.all([dhtsensoreturn('Temperature')]).then(function (data){
           console.log("Returning:");
-          APIreturn = "{\"DateTime\" : \"" + now + "\", \"Temperature\": \"" + sensortemperature + "\"}";
+          APIreturn = "{\"DateTime\" : \"" + now + "\", \"Temperature\": \"" + data[0] + "\"}";
           console.log(APIreturn);
           resp.write(APIreturn);
           resp.end();
