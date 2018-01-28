@@ -1,20 +1,27 @@
+/***********************************************************
+Request Resolver:
+
+***********************************************************/
 var http = require("http");
 var qs = require("querystring");
 var sensor = require('node-dht-sensor');
 var port = 9000;
-//var sensorvalue = '';
 
+//declare function connecting to DHT sensor
 var dhtsensoreturn = function(value) {
   return new Promise((resolve, reject) => {
     console.log('Getting ' + value + '...');
+        //Read Sensor HDT11 on pin 4
         sensor.read(11, 4, function(err, temperature, humidity) {
         if (!err) {
           switch (value) {
             case "Temperature": {
               var sensorvalue = temperature.toFixed(0);
+              break;
             }
             case "Humidity": {
               var sensorvalue = humidity.toFixed(0);
+              break;
             }
           }
           console.log('Returning '+ value + ': ' + sensorvalue);
@@ -31,6 +38,7 @@ http.createServer(function(req, resp) {
   var valuetoget = '';
   const now = new Date();
 
+//Determine reading based on URL provided
   switch (req.method) {
     case "GET":
       if (req.url === "/") {
@@ -40,21 +48,30 @@ http.createServer(function(req, resp) {
         resp.write("<html><head><title>Home</title></head><body>Brad's Test</body></html>");
         resp.end();
       }
+      //Get Temperature requested
       if (req.url === "/temperature") {
         console.log("*******************************************");
         console.log(now + "; Temperature Requested");
         valuetoget = 'Temperature';
+        break;
       }
+      //Get Humidity Requested
       if (req.url === "/humidity") {
         console.log("*******************************************");
         console.log(now + "; Humidity Requested");
         valuetoget = 'Humidity';
+        break;
       }
+
     case "POST":
       break;
+
+      //If nothing provided
     default:
       break;
   }
+
+  //If Temperature or Humidity is selected, call function to get the value requested
   if (valuetoget != '') {
     Promise.all([dhtsensoreturn(valuetoget)]).then(function (data){
       console.log("Returning:");
