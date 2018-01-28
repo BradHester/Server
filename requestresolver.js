@@ -4,6 +4,27 @@ var sensor = require('node-dht-sensor');
 
 var port = 9000;
 
+var dhtsensoreturn = function(value) {
+  return new Promise((resolve, reject) => {
+    console.log('Getting ' + value'...');
+        sensor.read(11, 4, function(err, temperature, humidity) {
+        if (!err) {
+          switch (value) {
+            case "temperature": {
+              var response = temperature.toFixed(0);
+            }
+            case "humidity": {
+              var response = humidity.toFixed(0);
+            }
+          }
+          console.log('Returning '+ value + ': ' + response);
+          resolve(response);
+        }
+      });
+    }).then(function(data){
+      return data
+    });
+};
 
 http.createServer(function(req, resp) {
 const now = new Date();
@@ -26,7 +47,7 @@ const now = new Date();
         });
         sensor.read(11, 4, function(err, temperature, humidity) {
          if (!err) {
-           var temperaturereturn = "{\"DateTime\" : \"" + now + "\", \"Temperature\": \"" + temperature + "\"}";
+           var temperaturereturn = "{\"DateTime\" : \"" + now + "\", \"Temperature\": \"" + dhtsensoreturn(temperature) + "\"}";
            console.log("Returning:");
            console.log(temperaturereturn);
            resp.write(temperaturereturn);
