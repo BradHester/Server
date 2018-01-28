@@ -42,18 +42,12 @@ const now = new Date();
       if (req.url === "/temperature") {
         console.log("*******************************************");
         console.log(now + "; Temperature Requested");
-        resp.writeHead(200, {
-          "ContentType": "application/json"
-        });
-        sensor.read(11, 4, function(err, temperature, humidity) {
-         if (!err) {
-           var temperaturereturn = "{\"DateTime\" : \"" + now + "\", \"Temperature\": \"" + dhtsensoreturn('Temperature') + "\"}";
-           console.log("Returning:");
-           console.log(temperaturereturn);
-           resp.write(temperaturereturn);
-           resp.end();
-           }
-        });
+        resp.writeHead(200, {"ContentType": "application/json"});
+        var temperaturereturn = "{\"DateTime\" : \"" + now + "\", \"Temperature\": \"" + dhtsensoreturn('Temperature') + "\"}";
+        console.log("Returning:");
+        console.log(temperaturereturn);
+        resp.write(temperaturereturn);
+        resp.end();
       }
 
       if (req.url === "/humidity") {
