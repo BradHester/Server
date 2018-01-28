@@ -30,6 +30,7 @@ var dhtsensoreturn = function(value) {
 
 http.createServer(function(req, resp) {
 const now = new Date();
+valuetoget = '';
 
   switch (req.method) {
     case "GET":
@@ -55,10 +56,12 @@ const now = new Date();
 
     case "POST":
       break;
+
     default:
       break;
   }
 
+if valuetoget <> ''{
   Promise.all([dhtsensoreturn(valuetoget)]).then(function (data){
     console.log("Returning:");
     APIreturn = "{\"DateTime\" : \"" + now + "\", \"' + valuetoget + '\": \"" + data[0] + "\"}";
@@ -67,6 +70,6 @@ const now = new Date();
     resp.write(APIreturn);
     resp.end();
   });
-
+}
 
 }).listen(port);
