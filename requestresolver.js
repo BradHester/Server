@@ -22,7 +22,7 @@ const now = new Date();
         console.log("*******************************************");
         console.log(now + "; Temperature Requested");
         resp.writeHead(200, {
-          "ContentType": "text/html"
+          "ContentType": "application/json"
         });
         sensor.read(11, 4, function(err, temperature, humidity) {
          if (!err) {
@@ -39,7 +39,7 @@ const now = new Date();
         console.log("*******************************************");
         console.log(now + "; Humidity Requested");
         resp.writeHead(200, {
-          "ContentType": "text/html"
+          "ContentType": "application/json"
         });
         sensor.read(11, 4, function(err, temperature, humidity) {
          if (!err) {
