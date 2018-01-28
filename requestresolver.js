@@ -19,7 +19,7 @@ var dhtsensoreturn = function(value) {
             }
           }
           console.log('Returning '+ value + ': ' + sensorvalue);
-          return sensorvalue
+          resolve(sensorvalue);
         }
       });
     }).then(function(data){
