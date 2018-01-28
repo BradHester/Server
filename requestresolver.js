@@ -1,8 +1,6 @@
 var http = require("http");
 var qs = require("querystring");
 var sensor = require('node-dht-sensor');
-var APIreturn = '';
-var valuetoget = '';
 var port = 9000;
 //var sensorvalue = '';
 
@@ -29,8 +27,9 @@ var dhtsensoreturn = function(value) {
 };
 
 http.createServer(function(req, resp) {
-const now = new Date();
-valuetoget = '';
+  var APIreturn = '';
+  var valuetoget = '';
+  const now = new Date();
 
   switch (req.method) {
     case "GET":
@@ -41,35 +40,29 @@ valuetoget = '';
         resp.write("<html><head><title>Home</title></head><body>Brad's Test</body></html>");
         resp.end();
       }
-
       if (req.url === "/temperature") {
         console.log("*******************************************");
         console.log(now + "; Temperature Requested");
         valuetoget = 'Temperature';
       }
-
       if (req.url === "/humidity") {
         console.log("*******************************************");
         console.log(now + "; Humidity Requested");
         valuetoget = 'Humidity';
       }
-
     case "POST":
       break;
-
     default:
       break;
   }
-
-if (valuetoget != '') {
-  Promise.all([dhtsensoreturn(valuetoget)]).then(function (data){
-    console.log("Returning:");
-    APIreturn = "{\"DateTime\" : \"" + now + "\", \"" + valuetoget + "\": \"" + data[0] + "\"}";
-    console.log(APIreturn);
-    resp.writeHead(200, {"ContentType": "application/json"});
-    resp.write(APIreturn);
-    resp.end();
-  });
-}
-
+  if (valuetoget != '') {
+    Promise.all([dhtsensoreturn(valuetoget)]).then(function (data){
+      console.log("Returning:");
+      APIreturn = "{\"DateTime\" : \"" + now + "\", \"" + valuetoget + "\": \"" + data[0] + "\"}";
+      console.log(APIreturn);
+      resp.writeHead(200, {"ContentType": "application/json"});
+      resp.write(APIreturn);
+      resp.end();
+    });
+  }
 }).listen(port);
