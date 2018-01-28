@@ -61,7 +61,7 @@ valuetoget = '';
       break;
   }
 
-if valuetoget <> ''{
+if valuetoget != ''{
   Promise.all([dhtsensoreturn(valuetoget)]).then(function (data){
     console.log("Returning:");
     APIreturn = "{\"DateTime\" : \"" + now + "\", \"" + valuetoget + "\": \"" + data[0] + "\"}";
