@@ -10,15 +10,15 @@ var dhtsensoreturn = function(value) {
         sensor.read(11, 4, function(err, temperature, humidity) {
         if (!err) {
           switch (value) {
-            case "temperature": {
+            case "Temperature": {
               var response = temperature.toFixed(0);
             }
-            case "humidity": {
+            case "Humidity": {
               var response = humidity.toFixed(0);
             }
           }
           console.log('Returning '+ value + ': ' + response);
-          resolve(response);
+          return response
         }
       });
     }).then(function(data){
@@ -47,7 +47,7 @@ const now = new Date();
         });
         sensor.read(11, 4, function(err, temperature, humidity) {
          if (!err) {
-           var temperaturereturn = "{\"DateTime\" : \"" + now + "\", \"Temperature\": \"" + dhtsensoreturn(temperature) + "\"}";
+           var temperaturereturn = "{\"DateTime\" : \"" + now + "\", \"Temperature\": \"" + dhtsensoreturn('Temperature') + "\"}";
            console.log("Returning:");
            console.log(temperaturereturn);
            resp.write(temperaturereturn);
