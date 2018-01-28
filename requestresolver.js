@@ -6,7 +6,7 @@ var port = 9000;
 
 var dhtsensoreturn = function(value) {
   return new Promise((resolve, reject) => {
-    console.log('Getting ' + value'...');
+    console.log('Getting ' + value + '...');
         sensor.read(11, 4, function(err, temperature, humidity) {
         if (!err) {
           switch (value) {
