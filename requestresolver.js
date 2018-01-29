@@ -75,7 +75,8 @@ http.createServer(function(req, resp) {
   if (valuetoget != '') {
     Promise.all([dhtsensoreturn(valuetoget)]).then(function (data){
       console.log("Returning:");
-      APIreturn = "{\"DateTime\" : \"" + now + "\", \"" + valuetoget + "\": \"" + data[0] + "\"}";
+
+      var APIreturn = JSON.stringify({"\"DateTime\" : \"" + now + "\", \"" + valuetoget + "\": \"" + data[0] + "\""});
       console.log(APIreturn);
       resp.writeHead(200, {"ContentType": "application/json"});
       resp.write(APIreturn);
