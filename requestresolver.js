@@ -81,7 +81,7 @@ http.createServer(function(req, resp) {
     //  else {
     //    APIreturn = JSON.stringify({"DateTime" :  now , "Humidity": data[0]});
   //    }
-      APIreturn = "{\" DateTime\" :  \"" + now + "\", \"" + valuetoget + "\": \"" + data[0] + "\"}";
+      APIreturn = "{\"DateTime\" :  \"" + now + "\", \"" + valuetoget + "\": \"" + data[0] + "\"}";
       console.log(APIreturn);
       resp.writeHead(200, {"ContentType": "application/json"});
       resp.write(APIreturn);
