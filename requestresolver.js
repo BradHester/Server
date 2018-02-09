@@ -83,15 +83,8 @@ http.createServer(function(req, resp) {
   //    }
       var dict = []; // create an empty array
 
-      dict.push({
-        key:   "DateTime",
-        value: now
-      });
-
-      dict.push({
-        key:   valuetoget,
-        value: data[0]
-      });
+      dict["DateTime"] = now;
+      dict[valuetoget] = data[0];
 
       APIreturn = JSON.stringify(dict);
 
