@@ -81,7 +81,7 @@ http.createServer(function(req, resp) {
     //  else {
     //    APIreturn = JSON.stringify({"DateTime" :  now , "Humidity": data[0]});
   //    }
-      var dict = []; // create an empty array
+      var dict = {}; // create an empty array
 
       dict["DateTime"] = now;
       dict[valuetoget] = data[0];
